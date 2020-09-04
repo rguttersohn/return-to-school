@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="step-container">
+      
+      <div id="nyc-school-district" class="map-wrapper graph-wrapper">
+        <button></button><button></button><button></button>
+        <svg></svg>
+        <div class="tooltip"></div>
+      </div>
+
+      <div id="nyc-zip-code" class="map-wrapper graph-wrapper">
+        <h3>Compass, SONYC, Cornerstone and Beacon Locations by Zip Code</h3>
+        <svg></svg>
+        <div class="legend-wrapper">
+          <i></i><span></span><i></i><span></span><i></i><span></span><i></i
+          ><span></span><i></i><span></span>
+        </div>
+        <div class="tooltip"></div>
+      </div>
+
+      <div class="graph-wrapper" id="childcare-settings">
+        <h3>Children in contracted system: breakdown by setting and age groups:</h3>
+        <svg></svg>
+        <div class="legend-wrapper">
+          <i></i><span></span><i></i><span></span><i></i><span></span>
+        </div>
+      </div>
+
+      <div class="graph-wrapper">
+        <div class="data-table">
+          <div class="data-table-container">
+            <p>Modality</p>
+            <p>Number of children enrolled in publicly funded</p>
+            <p>Percent of children enrolled</p>
+          </div>
+          <div class="data-table-container">
+            <p>Center</p>
+            <p>64,982</p>
+            <p>52.55%</p>
+          </div>
+          <div class="data-table-container">
+            <p>School</p>
+            <p>30,705</p>
+            <p>24.83%</p>
+          </div>
+          <div class="data-table-container">
+            <p>Family</p>
+            <p>23,397</p>
+            <p>18.92%</p>
+          </div>
+          <div class="data-table-container">
+            <p>Informal</p>
+            <p>4,582</p>
+            <p>3.71%</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="index.js" async defer></script>
+  </body>
+</html>

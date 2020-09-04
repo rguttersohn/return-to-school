@@ -1,0 +1,322 @@
+[
+    {
+      "School District Name": "Lower East Side",
+      "School District Number": "1",
+      "ELL_Number": 918,
+      "ELL_Percent": 0.07978,
+      "Students in Temporary Housing_Number": 1475,
+      "Students in Temporary Housing_Percent": 0.12966,
+      "Students with Disabilities (IEP)_Number": 2550,
+      "Students with Disabilities (IEP)_Percent": 0.22162
+    },
+    {
+      "School District Name": "Stuyvesant Town, Upper E. Side",
+      "School District Number": "2",
+      "ELL_Number": 4645,
+      "ELL_Percent": 0.07394,
+      "Students in Temporary Housing_Number": 4880,
+      "Students in Temporary Housing_Percent": 0.07749,
+      "Students with Disabilities (IEP)_Number": 10903,
+      "Students with Disabilities (IEP)_Percent": 0.17356
+    },
+    {
+      "School District Name": "Upper West Side",
+      "School District Number": "3",
+      "ELL_Number": 954,
+      "ELL_Percent": 0.04228,
+      "Students in Temporary Housing_Number": 1700,
+      "Students in Temporary Housing_Percent": 0.0753,
+      "Students with Disabilities (IEP)_Number": 4112,
+      "Students with Disabilities (IEP)_Percent": 0.18224
+    },
+    {
+      "School District Name": "East Harlem",
+      "School District Number": "4",
+      "ELL_Number": 1187,
+      "ELL_Percent": 0.09128,
+      "Students in Temporary Housing_Number": 1869,
+      "Students in Temporary Housing_Percent": 0.14335,
+      "Students with Disabilities (IEP)_Number": 3062,
+      "Students with Disabilities (IEP)_Percent": 0.23547
+    },
+    {
+      "School District Name": "Central Harlem",
+      "School District Number": "5",
+      "ELL_Number": 835,
+      "ELL_Percent": 0.07628,
+      "Students in Temporary Housing_Number": 2266,
+      "Students in Temporary Housing_Percent": 0.20167,
+      "Students with Disabilities (IEP)_Number": 2633,
+      "Students with Disabilities (IEP)_Percent": 0.24052
+    },
+    {
+      "School District Name": "Washington Heights",
+      "School District Number": "6",
+      "ELL_Number": 5191,
+      "ELL_Percent": 0.23924,
+      "Students in Temporary Housing_Number": 4085,
+      "Students in Temporary Housing_Percent": 0.18633,
+      "Students with Disabilities (IEP)_Number": 4428,
+      "Students with Disabilities (IEP)_Percent": 0.20407
+    },
+    {
+      "School District Name": "Mott Haven",
+      "School District Number": "7",
+      "ELL_Number": 2730,
+      "ELL_Percent": 0.14538,
+      "Students in Temporary Housing_Number": 3837,
+      "Students in Temporary Housing_Percent": 0.1982,
+      "Students with Disabilities (IEP)_Number": 4521,
+      "Students with Disabilities (IEP)_Percent": 0.24076
+    },
+    {
+      "School District Name": "Hunts Point, Port Morris",
+      "School District Number": "8",
+      "ELL_Number": 3554,
+      "ELL_Percent": 0.12966,
+      "Students in Temporary Housing_Number": 4435,
+      "Students in Temporary Housing_Percent": 0.15817,
+      "Students with Disabilities (IEP)_Number": 6245,
+      "Students with Disabilities (IEP)_Percent": 0.22783
+    },
+    {
+      "School District Name": "East Tremont, Morris Heights",
+      "School District Number": "9",
+      "ELL_Number": 6822,
+      "ELL_Percent": 0.20549,
+      "Students in Temporary Housing_Number": 8556,
+      "Students in Temporary Housing_Percent": 0.25032,
+      "Students with Disabilities (IEP)_Number": 7284,
+      "Students with Disabilities (IEP)_Percent": 0.21941
+    },
+    {
+      "School District Name": "Riverdale, Kingsbridge, Fordham",
+      "School District Number": "10",
+      "ELL_Number": 10536,
+      "ELL_Percent": 0.1958,
+      "Students in Temporary Housing_Number": 10548,
+      "Students in Temporary Housing_Percent": 0.19204,
+      "Students with Disabilities (IEP)_Number": 10601,
+      "Students with Disabilities (IEP)_Percent": 0.197
+    },
+    {
+      "School District Name": "Eastchester, Baychester, Co-op City",
+      "School District Number": "11",
+      "ELL_Number": 4313,
+      "ELL_Percent": 0.11192,
+      "Students in Temporary Housing_Number": 4894,
+      "Students in Temporary Housing_Percent": 0.12338,
+      "Students with Disabilities (IEP)_Number": 7601,
+      "Students with Disabilities (IEP)_Percent": 0.19723
+    },
+    {
+      "School District Name": "Crotona Park, Morrisania, Melrose",
+      "School District Number": "12",
+      "ELL_Number": 4143,
+      "ELL_Percent": 0.19747,
+      "Students in Temporary Housing_Number": 4409,
+      "Students in Temporary Housing_Percent": 0.20082,
+      "Students with Disabilities (IEP)_Number": 4770,
+      "Students with Disabilities (IEP)_Percent": 0.22736
+    },
+    {
+      "School District Name": "Brooklyn Hts, Downtown Brooklyn",
+      "School District Number": "13",
+      "ELL_Number": 835,
+      "ELL_Percent": 0.03895,
+      "Students in Temporary Housing_Number": 1569,
+      "Students in Temporary Housing_Percent": 0.07207,
+      "Students with Disabilities (IEP)_Number": 2940,
+      "Students with Disabilities (IEP)_Percent": 0.13715
+    },
+    {
+      "School District Name": "Williamsburg, Greenpoint",
+      "School District Number": "14",
+      "ELL_Number": 1806,
+      "ELL_Percent": 0.09863,
+      "Students in Temporary Housing_Number": 2020,
+      "Students in Temporary Housing_Percent": 0.10913,
+      "Students with Disabilities (IEP)_Number": 3721,
+      "Students with Disabilities (IEP)_Percent": 0.20321
+    },
+    {
+      "School District Name": "S. Brooklyn, Park Slope, Sunset Park",
+      "School District Number": "15",
+      "ELL_Number": 4270,
+      "ELL_Percent": 0.12885,
+      "Students in Temporary Housing_Number": 1814,
+      "Students in Temporary Housing_Percent": 0.05461,
+      "Students with Disabilities (IEP)_Number": 6589,
+      "Students with Disabilities (IEP)_Percent": 0.19882
+    },
+    {
+      "School District Name": "Bedford Stuyvesant",
+      "School District Number": "16",
+      "ELL_Number": 322,
+      "ELL_Percent": 0.04838,
+      "Students in Temporary Housing_Number": 1209,
+      "Students in Temporary Housing_Percent": 0.17924,
+      "Students with Disabilities (IEP)_Number": 1581,
+      "Students with Disabilities (IEP)_Percent": 0.23753
+    },
+    {
+      "School District Name": "Crown Heights",
+      "School District Number": "17",
+      "ELL_Number": 2007,
+      "ELL_Percent": 0.09316,
+      "Students in Temporary Housing_Number": 3304,
+      "Students in Temporary Housing_Percent": 0.15029,
+      "Students with Disabilities (IEP)_Number": 3884,
+      "Students with Disabilities (IEP)_Percent": 0.18028
+    },
+    {
+      "School District Name": "East Flatbush, Canarsie",
+      "School District Number": "18",
+      "ELL_Number": 952,
+      "ELL_Percent": 0.06824,
+      "Students in Temporary Housing_Number": 1574,
+      "Students in Temporary Housing_Percent": 0.10489,
+      "Students with Disabilities (IEP)_Number": 2764,
+      "Students with Disabilities (IEP)_Percent": 0.19812
+    },
+    {
+      "School District Name": "East New York",
+      "School District Number": "19",
+      "ELL_Number": 2798,
+      "ELL_Percent": 0.12619,
+      "Students in Temporary Housing_Number": 3776,
+      "Students in Temporary Housing_Percent": 0.17029,
+      "Students with Disabilities (IEP)_Number": 4499,
+      "Students with Disabilities (IEP)_Percent": 0.2029
+    },
+    {
+      "School District Name": "Bay Ridge, Bensonhurst",
+      "School District Number": "20",
+      "ELL_Number": 11024,
+      "ELL_Percent": 0.20386,
+      "Students in Temporary Housing_Number": 3023,
+      "Students in Temporary Housing_Percent": 0.056,
+      "Students with Disabilities (IEP)_Number": 8510,
+      "Students with Disabilities (IEP)_Percent": 0.15737
+    },
+    {
+      "School District Name": "Gravesend, Coney Island",
+      "School District Number": "21",
+      "ELL_Number": 6295,
+      "ELL_Percent": 0.1698,
+      "Students in Temporary Housing_Number": 2229,
+      "Students in Temporary Housing_Percent": 0.06002,
+      "Students with Disabilities (IEP)_Number": 6787,
+      "Students with Disabilities (IEP)_Percent": 0.18307
+    },
+    {
+      "School District Name": "Flatbush, Midwood, Sheepshead Bay",
+      "School District Number": "22",
+      "ELL_Number": 3978,
+      "ELL_Percent": 0.11367,
+      "Students in Temporary Housing_Number": 2780,
+      "Students in Temporary Housing_Percent": 0.07816,
+      "Students with Disabilities (IEP)_Number": 6014,
+      "Students with Disabilities (IEP)_Percent": 0.17184
+    },
+    {
+      "School District Name": "Brownsville, Ocean Hill",
+      "School District Number": "23",
+      "ELL_Number": 429,
+      "ELL_Percent": 0.04664,
+      "Students in Temporary Housing_Number": 2075,
+      "Students in Temporary Housing_Percent": 0.22336,
+      "Students with Disabilities (IEP)_Number": 2186,
+      "Students with Disabilities (IEP)_Percent": 0.23763
+    },
+    {
+      "School District Name": "Sunnyside, Woodside, Jackson Hts",
+      "School District Number": "24",
+      "ELL_Number": 12291,
+      "ELL_Percent": 0.21078,
+      "Students in Temporary Housing_Number": 5264,
+      "Students in Temporary Housing_Percent": 0.08835,
+      "Students with Disabilities (IEP)_Number": 9898,
+      "Students with Disabilities (IEP)_Percent": 0.16974
+    },
+    {
+      "School District Name": "Flushing, Whitestone",
+      "School District Number": "25",
+      "ELL_Number": 6825,
+      "ELL_Percent": 0.17642,
+      "Students in Temporary Housing_Number": 2144,
+      "Students in Temporary Housing_Percent": 0.05492,
+      "Students with Disabilities (IEP)_Number": 5672,
+      "Students with Disabilities (IEP)_Percent": 0.14661
+    },
+    {
+      "School District Name": "Bayside, Douglaston, Little Neck",
+      "School District Number": "26",
+      "ELL_Number": 2566,
+      "ELL_Percent": 0.0789,
+      "Students in Temporary Housing_Number": 1082,
+      "Students in Temporary Housing_Percent": 0.03311,
+      "Students with Disabilities (IEP)_Number": 4739,
+      "Students with Disabilities (IEP)_Percent": 0.14571
+    },
+    {
+      "School District Name": "Jamaica, Howard Beach, Rockaways",
+      "School District Number": "27",
+      "ELL_Number": 4589,
+      "ELL_Percent": 0.10015,
+      "Students in Temporary Housing_Number": 2913,
+      "Students in Temporary Housing_Percent": 0.06452,
+      "Students with Disabilities (IEP)_Number": 7981,
+      "Students with Disabilities (IEP)_Percent": 0.17418
+    },
+    {
+      "School District Name": "Jamaica, Forest Hills",
+      "School District Number": "28",
+      "ELL_Number": 4335,
+      "ELL_Percent": 0.1032,
+      "Students in Temporary Housing_Number": 2827,
+      "Students in Temporary Housing_Percent": 0.06671,
+      "Students with Disabilities (IEP)_Number": 6368,
+      "Students with Disabilities (IEP)_Percent": 0.1516
+    },
+    {
+      "School District Name": "Queens Village, Rosedale, Hollis",
+      "School District Number": "29",
+      "ELL_Number": 2316,
+      "ELL_Percent": 0.0886,
+      "Students in Temporary Housing_Number": 3042,
+      "Students in Temporary Housing_Percent": 0.11311,
+      "Students with Disabilities (IEP)_Number": 4293,
+      "Students with Disabilities (IEP)_Percent": 0.16423
+    },
+    {
+      "School District Name": "Long Island City, Astoria",
+      "School District Number": "30",
+      "ELL_Number": 6091,
+      "ELL_Percent": 0.1529,
+      "Students in Temporary Housing_Number": 3026,
+      "Students in Temporary Housing_Percent": 0.07429,
+      "Students with Disabilities (IEP)_Number": 5990,
+      "Students with Disabilities (IEP)_Percent": 0.15036
+    },
+    {
+      "School District Name": "Staten Island",
+      "School District Number": "31",
+      "ELL_Number": 3937,
+      "ELL_Percent": 0.06146,
+      "Students in Temporary Housing_Number": 2510,
+      "Students in Temporary Housing_Percent": 0.04031,
+      "Students with Disabilities (IEP)_Number": 15248,
+      "Students with Disabilities (IEP)_Percent": 0.23805
+    },
+    {
+      "School District Name": "Bushwick",
+      "School District Number": "32",
+      "ELL_Number": 2274,
+      "ELL_Percent": 0.1926,
+      "Students in Temporary Housing_Number": 1878,
+      "Students in Temporary Housing_Percent": "",
+      "Students with Disabilities (IEP)_Number": 2228,
+      "Students with Disabilities (IEP)_Percent": 0.1887
+    }
+  ]

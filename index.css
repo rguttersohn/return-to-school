@@ -1,0 +1,337 @@
+.series-intro {
+  font-style: italic;
+  font-size: 14px;
+  color: white;
+  background-color: #2fb457;
+  padding: 1%;
+  margin: 1.5%;
+}
+
+.series-intro a {
+  color: white !important;
+  font-weight: bold;
+}
+
+.series-intro div {
+  color: white;
+  margin: auto;
+  padding: 1% 3%;
+}
+
+.blog-comment-number,
+.showTags {
+  display: none;
+}
+.blog-tags {
+  display: none;
+}
+
+.step-container {
+  width: 700px;
+  margin: auto;
+  box-sizing: content-box;
+}
+
+.step-container * {
+  font-family: sans-serif;
+  line-height: 150%;
+}
+
+.step-container p,
+strong,
+em,
+li,
+ul,
+ol,
+text,
+h3 {
+  font-size: 14px;
+}
+
+.step-container h2 {
+  font-weight: bold;
+}
+
+.step-container span {
+  font-family: sans-serif;
+  line-height: 150%;
+}
+
+.step-container section {
+  margin: 5% auto;
+  padding-bottom: 10%;
+}
+
+.step-container section:first-of-type {
+  border-top: none;
+  margin-top: 0;
+}
+
+.step-container section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.step-container h3 {
+  font-weight: bolder;
+  text-align: center;
+}
+.step-container p strong {
+  font-weight: bold;
+}
+
+.step-container img {
+  display: block;
+  margin: 5% auto 5% auto;
+  width: 90%;
+}
+
+.step-container .table-note {
+  font-size: 90%;
+  font-style: italic;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.step-container .priorities {
+  text-align: center;
+  color: #0099cd;
+  text-transform: none;
+  line-height: 100%;
+}
+
+/*css for the aside box*/
+
+.step-container .aside div {
+  float: none;
+  width: 50%;
+  background-color: #ea0029;
+  padding: 1% 3%;
+  margin: 3% auto;
+}
+
+.step-container .aside div p {
+  color: white;
+  text-align: center;
+}
+
+.step-container .aside p span {
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+}
+
+.step-container .aside div img {
+  width: 55%;
+  display: block;
+  margin: auto;
+}
+
+.step-container .aside div:hover {
+  box-shadow: 3px 3px lightblue;
+}
+
+.step-container .aside:active {
+  box-shadow: 3px 3px lightblue;
+}
+
+.graph-wrapper {
+  margin: 5% auto 5%;
+  background-color: rgb(249, 249, 249);
+  padding: 3% 1%;
+  border-radius: 5px;
+  text-transform: none;
+}
+
+.graph-wrapper p {
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+
+.graph-wrapper svg {
+  margin: auto;
+  display: block;
+}
+.graph-wrapper.pull-quote,
+.graph-wrapper.single-data-point {
+  width: 300px;
+  padding: 5% 1%;
+  margin: 3% 1%;
+}
+
+.graph-wrapper.single-data-point
+  .cause-of-death-flexbox
+  .cause-of-death-container {
+  padding: 1% 3%;
+}
+
+.graph-wrapper.pull-quote p {
+  font-family: "Georgia", serif !important;
+}
+.graph-wrapper.pull-quote:nth-of-type(odd) {
+  float: right;
+}
+
+.graph-wrapper.pull-quote:nth-of-type(even),
+.graph-wrapper.single-data-point {
+  float: left;
+}
+.graph-wrapper.pull-quote p::before,
+.graph-wrapper.pull-quote p::after {
+  content: '"';
+  font-size: 66px;
+  color: #0099cd;
+  display: block;
+}
+.graph-wrapper.pull-quote p::after {
+  position: relative;
+  top: 35px;
+}
+
+.legend-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1% auto;
+  align-items: center;
+}
+
+.legend-wrapper i,
+.legend-wrapper span {
+  margin: 0 1%;
+}
+
+.legend-wrapper span {
+  font-size: 14px;
+}
+
+.legend-wrapper i {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+.line-chart-wrapper .legend-wrapper i {
+  border-radius: 50%;
+}
+
+.tooltip {
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  color: black;
+  font-family: "helvetica", sans-serif;
+  line-height: 150%;
+  font-weight: bold;
+  background-color: white;
+  padding: 1%;
+  border: 3px solid gainsboro;
+  border-radius: 15px;
+  width: 300px;
+  transition: opacity 0.3s ease-in-out;
+  display: none;
+  box-shadow: 5px 5px 10px gainsboro;
+}
+
+.stacked-bar-chart-wrapper .container {
+  display: flex;
+  margin: 0.5% 0;
+}
+.stacked-bar-chart-wrapper .container span {
+  width: 200px;
+  text-align: left;
+  font-size: 80%;
+}
+
+.stacked-bar-chart-wrapper#industry-immigration-status .container span {
+  width: 250px;
+}
+
+.graph-wrapper * {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.graph-wrapper#essential-industries div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.graph-wrapper .data-table {
+  width: 70%;
+  margin: auto;
+}
+.graph-wrapper .data-table .data-table-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.graph-wrapper .data-table .data-table-container p {
+  font-weight: normal;
+  width: 33%;
+}
+
+.graph-wrapper .data-table .data-table-container:nth-child(1) p {
+  font-weight: bold;
+}
+
+.graph-wrapper .data-table .data-table-container:nth-child(1) {
+  border-bottom: 3px solid black;
+}
+
+.graph-wrapper .data-table .data-table-container:hover {
+  background-color: gainsboro;
+}
+
+.map-wrapper svg path:hover {
+  stroke-width: 3px;
+  stroke: white;
+  }
+
+
+@media screen and (max-width: 800px) {
+  .step-container p {
+    font-size: 22px;
+  }
+  .step-container h2,
+  .step-container h3 {
+    font-size: 30px;
+  }
+
+  .step-container ul li,
+  .step-container ol li {
+    font-size: 22px;
+    line-height: 120%;
+  }
+
+  .step-container .aside div {
+    float: none;
+    width: 100%;
+    margin: 3% auto;
+  }
+
+  .step-container .aside div img {
+    display: none;
+  }
+
+  .step-container .aside div p {
+    text-align: center;
+  }
+
+  section h2 {
+    font-size: 200%;
+  }
+
+  .graph-wrapper.pull-quote,
+  .graph-wrapper.single-data-point {
+    float: none !important;
+    width: 100% !important;
+  }
+
+  .graph-wrapper.single-data-point div {
+    width: 95%;
+    margin: auto;
+  }
+}
