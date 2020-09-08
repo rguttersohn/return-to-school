@@ -286,9 +286,51 @@ h3 {
 }
 
 .map-wrapper svg path:hover {
-  stroke-width: 3px;
+  stroke-width: 1px;
   stroke: white;
   }
+
+#nyc-school-district .legend-wrapper span::before{
+  content:"≤ "
+}
+
+#nyc-school-district .button-flex-container {
+  display:flex;
+  justify-content: center;
+}
+#nyc-school-district button {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0.5% 0;
+  text-align: center;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  border: 1px solid lightblue;
+  padding: 1.2%;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 220px;
+  height: 60px;
+  box-sizing: border-box;
+}
+#nyc-school-district button::before,
+#nyc-school-district button::after {
+  box-sizing: border-box;
+}
+#nyc-school-district button:hover,
+#nyc-school-district button:active,
+#nyc-school-district button:focus {
+  border-bottom: 3px solid #0099cd;
+  background-color: white;
+  color: black;
+}
+
+#nyc-school-district .button-active {
+  border-bottom: 3px solid #0099cd;
+  background-color: white;
+  color: black;
+}
 
 
 @media screen and (max-width: 800px) {
