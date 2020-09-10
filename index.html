@@ -17,13 +17,17 @@
     <main class="step-container">
       <div id="nyc-school-district" class="map-wrapper graph-wrapper">
         <div class="button-flex-container">
-          <button data-color-index="0"></button><button data-color-index="1"></button><button data-color-index="2"></button>
+          <button data-color-index="0"></button
+          ><button data-color-index="1"></button
+          ><button data-color-index="2"></button>
+        </div>
+        <div class="legend-wrapper">
+          <svg/>
         </div>
         <p class="table-note"><span></span> by NYC school district</p>
-        <div class="legend-wrapper">
-          <i></i><span></span><i></i><span></span><i></i><span></span><i></i><span></span>
+        <div class="map-wrapper">
+          <svg></svg>
         </div>
-        <svg></svg>
         <div class="tooltip"></div>
       </div>
 
@@ -31,13 +35,16 @@
         <h3>Compass, SONYC, Cornerstone and Beacon Locations by Zip Code</h3>
         <svg></svg>
         <div class="legend-wrapper">
-          <i></i><span></span><i></i><span></span><i></i><span></span><i></i><span></span>
+          <i></i><span></span><i></i><span></span><i></i><span></span><i></i
+          ><span></span>
         </div>
         <div class="tooltip"></div>
       </div>
 
       <div class="graph-wrapper" id="childcare-settings">
-        <h3>Children in contracted system: breakdown by setting and age groups:</h3>
+        <h3>
+          Children in contracted system: breakdown by setting and age groups:
+        </h3>
         <svg></svg>
         <div class="legend-wrapper">
           <i></i><span></span><i></i><span></span><i></i><span></span>
@@ -74,9 +81,10 @@
         </div>
       </div>
     </main>
-
     <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-scale-cluster@1.3.1/dist/d3-scale-cluster.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous"></script>
     <script src="index.js" async defer></script>
   </body>
 </html>

@@ -64,7 +64,7 @@ Promise.all([nySDURL, districtDataURL])
       const geoPath = d3.geoPath().projection(projection);
 
       //create the map
-      d3.select("#nyc-school-district svg")
+      d3.select("#nyc-school-district .map-wrapper svg")
         .attr("height", height)
         .attr("width", width)
         .style("transform", "scale(1,-1)")
@@ -100,8 +100,8 @@ Promise.all([nySDURL, districtDataURL])
     const schoolDistrictDataInteraction = (data, color) => {
       const colors = [
         ["#0099cd","#51b3d7","#82cde1","#b0e6ee","#deffff"].reverse(),
-        ["#de425b","#ec7481","#f69fa7","#fdc9ce","#fff3f4"].reverse(),
-        ["#019966","#52b389","#83ccac","#b1e6cf","#e0fff2"].reverse(),
+        ["#de425b", "#ec7481", "#f69fa7", "#fdc9ce", "#fff3f4"].reverse(),
+        ["#019966", "#52b389", "#83ccac", "#b1e6cf", "#e0fff2"].reverse(),
       ];
 
       activeColor = [];
@@ -112,37 +112,59 @@ Promise.all([nySDURL, districtDataURL])
           sdMap.features,
           (d) => d.properties[`${activeData}`]
         );
-        let quantile = d3
-          .scaleQuantile()
+        let scale = d3
+          .scaleCluster()
           .domain(sdMap.features.map((d) => d.properties[`${activeData}`]))
           .range(activeColor[0]);
 
-          
-
-
-        let legendIcons = document.querySelectorAll(
-          "#nyc-school-district .legend-wrapper i"
-        );
-        let legendText = document.querySelectorAll(
-          "#nyc-school-district .legend-wrapper span"
-        );
+     
 
         d3.selectAll("#nyc-school-district svg path")
           .data(sdMap.features)
           .transition()
           .duration(300)
-          .attr("fill", (d) => quantile(d.properties[`${activeData}`]))
+          .attr("fill", (d) => scale(d.properties[`${activeData}`]))
           .delay((d, i) => i * 10);
 
-        for (let i = 0; i < legendIcons.length; i++) {
-          legendIcons[i].style.backgroundColor = activeColor[0][i];
-          legendText[i].textContent = [
-            deviation,
-            deviation * 2,
-            deviation * 3,
-            max,
-          ].map((el) => d3.format(",")(parseInt(el)))[i];
+        //adding legend
+
+        //function for the labels
+        const customLabel = function({
+          i,
+          genLength,
+          generatedLabels,
+          labelDelimiter
+        }) {
+          if (i === 0) {
+            const values = generatedLabels[i].split(` ${labelDelimiter} `)
+            return `${commaFormatter(scale.export().breakpoints[0])} to ${commaFormatter(scale.export().breakpoints[1])}`
+          } else if (i === genLength - 1) {
+            const values = generatedLabels[i].split(` ${labelDelimiter} `)
+            if (values[0] !== max){
+            return `${values[0]} or greater`}
+            else {return `${values[0]}`}
+          }
+          return generatedLabels[i]
         }
+
+        console.log(scale.export().breakpoints)
+
+        var legend = d3
+          .legendColor()
+          .labelFormat(d3.format(","))
+          .useClass(false)
+          .shapeWidth(100)
+          .scale(scale)
+          .orient('horizontal')
+          .labelWrap(80)
+          .labels(customLabel);
+
+        d3.select("#nyc-school-district .legend-wrapper svg")
+        .attr('width',500)
+        .attr('height',70)
+        .append("g")
+        .attr("class", "legendQuant")
+        d3.select(".legendQuant").call(legend);
       };
 
       const buttonLabels = [
@@ -164,6 +186,7 @@ Promise.all([nySDURL, districtDataURL])
       buttons[0].classList.add("button-active");
       activeColor.push(colors[0]);
       changeMapColor("ELL_Number");
+      mapHeader.textContent = "English Language Learners"
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].textContent = buttonLabels[i];
