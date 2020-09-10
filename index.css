@@ -209,6 +209,7 @@ h3 {
   display: inline-block;
   width: 15px;
   height: 15px;
+  transition:background-color .5s ease-in-out;
 }
 
 .line-chart-wrapper .legend-wrapper i {
@@ -291,7 +292,15 @@ h3 {
   }
 
 #nyc-school-district .legend-wrapper span::before{
-  content:"≤ "
+  content:"≤ ";
+}
+
+#nyc-school-district .legend-wrapper span:first-of-type::before{
+  content:"≥ "
+}
+
+#nyc-school-district .legend-wrapper .insert-greater-than::before{
+  content: "≥ "
 }
 
 #nyc-school-district .button-flex-container {

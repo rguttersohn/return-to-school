@@ -43,7 +43,6 @@ Promise.all([nySDURL, districtDataURL])
         tooltip.style.left = `${event.clientX}px`;
         tooltip.style.top = `${event.clientY * 1.1}px`;
         tooltip.style.borderColor = event.target.getAttribute("fill");
-        tooltip.innerHTML = `Tooltip info`;
       };
 
       const hideTooltip = () => {
@@ -127,44 +126,26 @@ Promise.all([nySDURL, districtDataURL])
           .delay((d, i) => i * 10);
 
         //adding legend
+        const mapLegend = document.querySelectorAll(
+          "#nyc-school-district .legend-wrapper i"
+        );
+        const mapLegendSpans = document.querySelectorAll(
+          "#nyc-school-district .legend-wrapper span"
+        );
 
-        //function for the labels
-        const customLabel = function({
-          i,
-          genLength,
-          generatedLabels,
-          labelDelimiter
-        }) {
-          if (i === 0) {
-            const values = generatedLabels[i].split(` ${labelDelimiter} `)
-            return `${commaFormatter(scale.export().breakpoints[0])} to ${commaFormatter(scale.export().breakpoints[1])}`
-          } else if (i === genLength - 1) {
-            const values = generatedLabels[i].split(` ${labelDelimiter} `)
-            if (values[0] !== max){
-            return `${values[0]} or greater`}
-            else {return `${values[0]}`}
-          }
-          return generatedLabels[i]
+        for (let i = 0; i < mapLegend.length; i++) {
+          mapLegend[i].style.backgroundColor = activeColor[0][i];
+          mapLegendSpans[i].textContent = commaFormatter(scale.export().breakpoints[i]);
+          mapLegendSpans[i].dataset.value = scale.export().breakpoints[i]
         }
-
-        console.log(scale.export().breakpoints)
-
-        var legend = d3
-          .legendColor()
-          .labelFormat(d3.format(","))
-          .useClass(false)
-          .shapeWidth(100)
-          .scale(scale)
-          .orient('horizontal')
-          .labelWrap(80)
-          .labels(customLabel);
-
-        d3.select("#nyc-school-district .legend-wrapper svg")
-        .attr('width',500)
-        .attr('height',70)
-        .append("g")
-        .attr("class", "legendQuant")
-        d3.select(".legendQuant").call(legend);
+        mapLegendSpans.forEach(span=>{
+          if (Number(span.dataset.value) !== max && span.nextElementSibling === null){
+            span.classList.add('insert-greater-than')
+          } else if(Number(span.dataset.value) === max && span.nextElementSibling === null){
+            span.classList.remove('insert-greater-than')
+          }
+         
+        })
       };
 
       const buttonLabels = [
