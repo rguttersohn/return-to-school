@@ -99,20 +99,26 @@ Promise.all([nySDURL, districtDataURL])
 
     const schoolDistrictDataInteraction = (data, color) => {
       const colors = [
-        ["#0099cd", "#5fb3dd", "#90cdee", "#bde8ff"].reverse(),
-        ["#de425b", "#ed7883", "#f9a7ac", "#ffd5d7"].reverse(),
-        ["#019966", "#5ab589", "#8fd0ae", "#c1ecd4"].reverse(),
+        ["#0099cd","#51b3d7","#82cde1","#b0e6ee","#deffff"].reverse(),
+        ["#de425b","#ec7481","#f69fa7","#fdc9ce","#fff3f4"].reverse(),
+        ["#019966","#52b389","#83ccac","#b1e6cf","#e0fff2"].reverse(),
       ];
 
       activeColor = [];
 
       const changeMapColor = (activeData) => {
         let max = d3.max(sdMap.features, (d) => d.properties[`${activeData}`]);
-        let deviation = d3.deviation(sdMap.features, (d) => d.properties[`${activeData}`]);
-        let quantile = d3.scaleQuantile().domain(sdMap.features.map(d=>d.properties[`${activeData}`]))
-        .range(activeColor)
-        console.log(quantile)
-      
+        let deviation = d3.deviation(
+          sdMap.features,
+          (d) => d.properties[`${activeData}`]
+        );
+        let quantile = d3
+          .scaleQuantile()
+          .domain(sdMap.features.map((d) => d.properties[`${activeData}`]))
+          .range(activeColor[0]);
+
+          
+
 
         let legendIcons = document.querySelectorAll(
           "#nyc-school-district .legend-wrapper i"
@@ -125,24 +131,7 @@ Promise.all([nySDURL, districtDataURL])
           .data(sdMap.features)
           .transition()
           .duration(300)
-          .attr("fill", (d) => {
-            if (d.properties[`${activeData}`] < deviation) {
-              return activeColor[0][0];
-            } else if (
-              d.properties[`${activeData}`] > deviation &&
-              d.properties[`${activeData}`] <= deviation * 2
-            ) {
-              return activeColor[0][1];
-            } else if (
-              d.properties[`${activeData}`] > deviation * 2 &&
-              d.properties[`${activeData}`] <= deviation * 3
-            ) {
-              return activeColor[0][2];
-            }
-            if (d.properties[`${activeData}`] > deviation * 3) {
-              return activeColor[0][3];
-            }
-          })
+          .attr("fill", (d) => quantile(d.properties[`${activeData}`]))
           .delay((d, i) => i * 10);
 
         for (let i = 0; i < legendIcons.length; i++) {
