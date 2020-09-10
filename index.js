@@ -9,6 +9,31 @@ Promise.all([nySDURL, districtDataURL])
     return Promise.all(values.map((resp) => resp.json()));
   })
   .then(([schoolDistrictMapData, districtData]) => {
+    const sdMap = topojson.feature(schoolDistrictMapData, {
+      type: "GeometryCollection",
+      geometries: schoolDistrictMapData.objects.nysd.geometries,
+    });
+
+    // join with district data
+    sdMap.features.map((shape) => {
+      districtData.forEach((el) => {
+        if (
+          shape.properties.SchoolDist === parseInt(el["School District Number"])
+        ) {
+          shape.properties["ELL_Number"] = el["ELL_Number"];
+          shape.properties["ELL_Percent"] = el["ELL_Percent"];
+          shape.properties["Students in Temporary Housing_Number"] =
+            el["Students in Temporary Housing_Number"];
+          shape.properties["Students in Temporary Housing_Percent"] =
+            el["Students in Temporary Housing_Percent"];
+          shape.properties["Students with Disabilities (IEP)_Number"] =
+            el["Students with Disabilities (IEP)_Number"];
+          shape.properties["Students with Disabilities (IEP)_Percent"] =
+            el["Students with Disabilities (IEP)_Percent"];
+        }
+      });
+    });
+
     const createschoolDistrictMap = () => {
       let tooltip = document.querySelector("#nyc-school-district .tooltip");
 
@@ -25,11 +50,6 @@ Promise.all([nySDURL, districtDataURL])
         tooltip.style.display = "none";
       };
 
-      const sdMap = topojson.feature(schoolDistrictMapData, {
-        type: "GeometryCollection",
-        geometries: schoolDistrictMapData.objects.nysd.geometries,
-      });
-
       const width = 650,
         height = 650;
 
@@ -44,11 +64,10 @@ Promise.all([nySDURL, districtDataURL])
       const geoPath = d3.geoPath().projection(projection);
 
       //create the map
-
       d3.select("#nyc-school-district svg")
         .attr("height", height)
         .attr("width", width)
-        .attr("transform", "scale(1,-1)")
+        .style("transform", "scale(1,-1)")
         .append("g")
         .attr("class", "district-shapes")
         .selectAll("path")
@@ -62,21 +81,6 @@ Promise.all([nySDURL, districtDataURL])
         .attr("data-sd", (d) => d.properties.SchoolDist)
         .on("mouseenter", showTooltip)
         .on("mouseleave", hideTooltip);
-
-      //add district labels
-      d3.select("#nyc-school-district svg")
-        .append("g")
-        .attr("class", "disrict-labels")
-        .selectAll("text")
-        .data(sdMap.features)
-        .enter()
-        .append("text")
-        .text((d) => d.properties.SchoolDist)
-        .attr('text-anchor','middle')
-        .attr('transform', (d)=> { return `translate(${geoPath.centroid(d)}) scale(1,-1)`; })
-        .attr('fill', 'dimgray')
-        .style('font-size','10px')
-        .style('pointer-events','none');
 
       districtData.forEach((item) => {
         let paths = document.querySelectorAll(
@@ -93,19 +97,23 @@ Promise.all([nySDURL, districtDataURL])
     };
     createschoolDistrictMap();
 
-  
     const schoolDistrictDataInteraction = (data, color) => {
       const colors = [
         ["#0099cd", "#5fb3dd", "#90cdee", "#bde8ff"].reverse(),
         ["#de425b", "#ed7883", "#f9a7ac", "#ffd5d7"].reverse(),
         ["#019966", "#5ab589", "#8fd0ae", "#c1ecd4"].reverse(),
       ];
-  
+
       activeColor = [];
-    
+
       const changeMapColor = (activeData) => {
-        let max = d3.max(districtData, (d) => d[`${activeData}`]);
-        let deviation = d3.deviation(districtData, (d) => d[`${activeData}`]);
+        let max = d3.max(sdMap.features, (d) => d.properties[`${activeData}`]);
+        let deviation = d3.deviation(sdMap.features, (d) => d.properties[`${activeData}`]);
+        let quantile = d3.scaleQuantile().domain(sdMap.features.map(d=>d.properties[`${activeData}`]))
+        .range(activeColor)
+        console.log(quantile)
+      
+
         let legendIcons = document.querySelectorAll(
           "#nyc-school-district .legend-wrapper i"
         );
@@ -114,24 +122,24 @@ Promise.all([nySDURL, districtDataURL])
         );
 
         d3.selectAll("#nyc-school-district svg path")
-          .data(districtData)
+          .data(sdMap.features)
           .transition()
           .duration(300)
-          .attr("fill", (d, i) => {
-            if (d[`${activeData}`] <= deviation) {
+          .attr("fill", (d) => {
+            if (d.properties[`${activeData}`] < deviation) {
               return activeColor[0][0];
             } else if (
-              d[`${activeData}`] > deviation &&
-              d[`${activeData}`] <= deviation * 2
+              d.properties[`${activeData}`] > deviation &&
+              d.properties[`${activeData}`] <= deviation * 2
             ) {
               return activeColor[0][1];
             } else if (
-              d[`${activeData}`] > deviation * 2 &&
-              d[`${activeData}`] <= deviation * 3
+              d.properties[`${activeData}`] > deviation * 2 &&
+              d.properties[`${activeData}`] <= deviation * 3
             ) {
               return activeColor[0][2];
             }
-            if (d[`${activeData}`] > deviation * 3) {
+            if (d.properties[`${activeData}`] > deviation * 3) {
               return activeColor[0][3];
             }
           })
@@ -159,29 +167,30 @@ Promise.all([nySDURL, districtDataURL])
         "Students with Disabilities (IEP)_Number",
       ];
       let buttons = document.querySelectorAll("#nyc-school-district button");
-      let mapHeader = document.querySelector('#nyc-school-district .table-note span')
-      
+      let mapHeader = document.querySelector(
+        "#nyc-school-district .table-note span"
+      );
 
       //setup initial map presentation
-      buttons[0].classList.add('button-active')
-      activeColor.push(colors[0])
-      changeMapColor("ELL_Number")
+      buttons[0].classList.add("button-active");
+      activeColor.push(colors[0]);
+      changeMapColor("ELL_Number");
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].textContent = buttonLabels[i];
         buttons[i].dataset.dataName = dataNames[i];
 
         buttons[i].addEventListener("click", (event) => {
-          let active = event.target.parentNode.querySelector('.button-active')
-        
-          if (active){
-            active.classList.remove('button-active')
+          let active = event.target.parentNode.querySelector(".button-active");
+
+          if (active) {
+            active.classList.remove("button-active");
           }
-          event.target.classList.add('button-active')
+          event.target.classList.add("button-active");
           activeColor.pop();
           activeColor.push(colors[event.target.dataset.colorIndex]);
           changeMapColor(event.target.getAttribute("data-data-name"));
-          mapHeader.textContent = event.target.textContent 
+          mapHeader.textContent = event.target.textContent;
         });
       }
     };
@@ -236,7 +245,7 @@ Promise.all([nycZipURL, sitesURL])
       d3.select("#nyc-zip-code svg")
         .attr("height", height)
         .attr("width", width)
-        .attr("transform", "scale(1,-1)")
+        .style("transform", "scale(1,-1)")
         .selectAll("path")
         .data(nycZipMap.features)
         .enter()
