@@ -1,5 +1,5 @@
 const commaFormatter = d3.format(",");
-const percentFormatter = d3.format("%");
+const percentFormatter = d3.format(",.1%");
 const nySDURL = fetch("./nysd.json");
 const districtDataURL = fetch("./districtData.json");
 const nycZipURL = fetch("New_Zip_Code_Boundary.json");
@@ -42,7 +42,16 @@ Promise.all([nySDURL, districtDataURL])
         tooltip.style.opacity = 1;
         tooltip.style.left = `${event.clientX}px`;
         tooltip.style.top = `${event.clientY * 1.1}px`;
-        tooltip.style.borderColor = event.target.getAttribute("fill");
+        tooltip.style.borderColor = event.target.getAttribute("fill")
+
+        sdMap.features.forEach(el=>{
+          if (el.properties["SchoolDist"] === parseInt(event.target.dataset.sd)){
+            tooltip.innerHTML = `School District ${el.properties['SchoolDist']}<br>
+            Number of ${event.target.dataset.label}: ${commaFormatter(el.properties[event.target.dataset.dataName])}<br>
+            Percent of district: ${percentFormatter(el.properties[event.target.dataset.dataPercent])}`
+          }
+        })
+
       };
 
       const hideTooltip = () => {
@@ -81,18 +90,6 @@ Promise.all([nySDURL, districtDataURL])
         .on("mouseenter", showTooltip)
         .on("mouseleave", hideTooltip);
 
-      districtData.forEach((item) => {
-        let paths = document.querySelectorAll(
-          `#nyc-school-district svg path[data-sd="${item["School District Number"]}"]`
-        );
-        paths.forEach((path) => {
-          path.dataset.ellNumber = item.ELL_Number;
-          path.dataset.tempHousing =
-            item["Students in Temporary Housing_Number"];
-          path.dataset.studentDisabilities =
-            item["Students with Disabilities (IEP)_Number"];
-        });
-      });
     };
     createschoolDistrictMap();
 
@@ -158,6 +155,8 @@ Promise.all([nySDURL, districtDataURL])
         "Students in Temporary Housing_Number",
         "Students with Disabilities (IEP)_Number",
       ];
+
+      const dataPercents = ["ELL_Percent","Students in Temporary Housing_Percent","Students with Disabilities (IEP)_Percent"]
       let buttons = document.querySelectorAll("#nyc-school-district button");
       let mapHeader = document.querySelector(
         "#nyc-school-district .table-note span"
@@ -167,11 +166,18 @@ Promise.all([nySDURL, districtDataURL])
       buttons[0].classList.add("button-active");
       activeColor.push(colors[0]);
       changeMapColor("ELL_Number");
-      mapHeader.textContent = "English Language Learners"
+      mapHeader.textContent = "English Language Learners";
+      d3.selectAll('#nyc-school-district svg path').attr('data-data-name',dataNames[0]).attr('data-data-percent',dataPercents[0])
+      .attr('data-label',buttonLabels[0])
+
+      
+
+      //adding event to buttons
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].textContent = buttonLabels[i];
         buttons[i].dataset.dataName = dataNames[i];
+        buttons[i].dataset.dataPercent = dataPercents[i]
 
         buttons[i].addEventListener("click", (event) => {
           let active = event.target.parentNode.querySelector(".button-active");
@@ -184,6 +190,9 @@ Promise.all([nySDURL, districtDataURL])
           activeColor.push(colors[event.target.dataset.colorIndex]);
           changeMapColor(event.target.getAttribute("data-data-name"));
           mapHeader.textContent = event.target.textContent;
+
+        d3.selectAll('#nyc-school-district svg path').attr('data-data-name',event.target.getAttribute('data-data-name'))
+        .attr('data-data-percent',event.target.getAttribute('data-data-percent')).attr('data-label',event.target.textContent)
         });
       }
     };
