@@ -46,9 +46,9 @@ Promise.all([nySDURL, districtDataURL])
 
         sdMap.features.forEach(el=>{
           if (el.properties["SchoolDist"] === parseInt(event.target.dataset.sd)){
-            tooltip.innerHTML = `School District ${el.properties['SchoolDist']}<br>
-            Number of ${event.target.dataset.label}: ${commaFormatter(el.properties[event.target.dataset.dataName])}<br>
-            Percent of district: ${percentFormatter(el.properties[event.target.dataset.dataPercent])}`
+            tooltip.innerHTML = `<p class="table-note" style="font-weight:bold">School District ${el.properties['SchoolDist']}</p>
+            <p class="table-note">Number of ${event.target.dataset.label}:</p> ${commaFormatter(el.properties[event.target.dataset.dataName])}
+            <p class="table-note">Percent of district:</p>${percentFormatter(el.properties[event.target.dataset.dataPercent])}`
           }
         })
 
@@ -217,7 +217,7 @@ Promise.all([nycZipURL, sitesURL])
         tooltip.style.left = `${event.clientX}px`;
         tooltip.style.top = `${event.clientY * 1.1}px`;
         tooltip.style.borderColor = event.target.getAttribute("fill");
-        tooltip.innerHTML = `Programs in zip code <br>${event.target.dataset.zipCode}:<br> ${event.target.dataset.sites}`;
+        tooltip.innerHTML = `<p class="table-note">Programs in zip code ${event.target.dataset.zipCode}:</p> ${event.target.dataset.sites}`;
       };
 
       const hideTooltip = () => {

@@ -230,10 +230,11 @@ h3 {
   padding: 1%;
   border: 3px solid gainsboro;
   border-radius: 15px;
-  width: 300px;
+  width: 250px;
   transition: opacity 0.3s ease-in-out;
   display: none;
   box-shadow: 5px 5px 10px gainsboro;
+  text-align:center
 }
 
 .stacked-bar-chart-wrapper .container {
