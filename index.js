@@ -42,16 +42,25 @@ Promise.all([nySDURL, districtDataURL])
         tooltip.style.opacity = 1;
         tooltip.style.left = `${event.clientX}px`;
         tooltip.style.top = `${event.clientY * 1.1}px`;
-        tooltip.style.borderColor = event.target.getAttribute("fill")
+        tooltip.style.borderColor = event.target.getAttribute("fill");
 
-        sdMap.features.forEach(el=>{
-          if (el.properties["SchoolDist"] === parseInt(event.target.dataset.sd)){
-            tooltip.innerHTML = `<p class="table-note" style="font-weight:bold">School District ${el.properties['SchoolDist']}</p>
-            <p class="table-note">Number of ${event.target.dataset.label}:</p> ${commaFormatter(el.properties[event.target.dataset.dataName])}
-            <p class="table-note">Percent of district:</p>${percentFormatter(el.properties[event.target.dataset.dataPercent])}`
+        sdMap.features.forEach((el) => {
+          if (
+            el.properties["SchoolDist"] === parseInt(event.target.dataset.sd)
+          ) {
+            tooltip.innerHTML = `<p class="table-note" style="font-weight:bold">School District ${
+              el.properties["SchoolDist"]
+            }</p>
+            <p class="table-note">Number of ${
+              event.target.dataset.label
+            }:</p> ${commaFormatter(
+              el.properties[event.target.dataset.dataName]
+            )}
+            <p class="table-note">Percent of district:</p>${percentFormatter(
+              el.properties[event.target.dataset.dataPercent]
+            )}`;
           }
-        })
-
+        });
       };
 
       const hideTooltip = () => {
@@ -89,13 +98,12 @@ Promise.all([nySDURL, districtDataURL])
         .attr("data-sd", (d) => d.properties.SchoolDist)
         .on("mouseenter", showTooltip)
         .on("mouseleave", hideTooltip);
-
     };
     createschoolDistrictMap();
 
     const schoolDistrictDataInteraction = (data, color) => {
       const colors = [
-        ["#0099cd","#51b3d7","#82cde1","#b0e6ee","#deffff"].reverse(),
+        ["#0099cd", "#51b3d7", "#82cde1", "#b0e6ee", "#deffff"].reverse(),
         ["#de425b", "#ec7481", "#f69fa7", "#fdc9ce", "#fff3f4"].reverse(),
         ["#019966", "#52b389", "#83ccac", "#b1e6cf", "#e0fff2"].reverse(),
       ];
@@ -112,8 +120,6 @@ Promise.all([nySDURL, districtDataURL])
           .scaleCluster()
           .domain(sdMap.features.map((d) => d.properties[`${activeData}`]))
           .range(activeColor[0]);
-
-     
 
         d3.selectAll("#nyc-school-district svg path")
           .data(sdMap.features)
@@ -132,17 +138,24 @@ Promise.all([nySDURL, districtDataURL])
 
         for (let i = 0; i < mapLegend.length; i++) {
           mapLegend[i].style.backgroundColor = activeColor[0][i];
-          mapLegendSpans[i].textContent = commaFormatter(scale.export().breakpoints[i]);
-          mapLegendSpans[i].dataset.value = scale.export().breakpoints[i]
+          mapLegendSpans[i].textContent = commaFormatter(
+            scale.export().breakpoints[i]
+          );
+          mapLegendSpans[i].dataset.value = scale.export().breakpoints[i];
         }
-        mapLegendSpans.forEach(span=>{
-          if (Number(span.dataset.value) !== max && span.nextElementSibling === null){
-            span.classList.add('insert-greater-than')
-          } else if(Number(span.dataset.value) === max && span.nextElementSibling === null){
-            span.classList.remove('insert-greater-than')
+        mapLegendSpans.forEach((span) => {
+          if (
+            Number(span.dataset.value) !== max &&
+            span.nextElementSibling === null
+          ) {
+            span.classList.add("insert-greater-than");
+          } else if (
+            Number(span.dataset.value) === max &&
+            span.nextElementSibling === null
+          ) {
+            span.classList.remove("insert-greater-than");
           }
-         
-        })
+        });
       };
 
       const buttonLabels = [
@@ -156,7 +169,11 @@ Promise.all([nySDURL, districtDataURL])
         "Students with Disabilities (IEP)_Number",
       ];
 
-      const dataPercents = ["ELL_Percent","Students in Temporary Housing_Percent","Students with Disabilities (IEP)_Percent"]
+      const dataPercents = [
+        "ELL_Percent",
+        "Students in Temporary Housing_Percent",
+        "Students with Disabilities (IEP)_Percent",
+      ];
       let buttons = document.querySelectorAll("#nyc-school-district button");
       let mapHeader = document.querySelector(
         "#nyc-school-district .table-note span"
@@ -167,17 +184,17 @@ Promise.all([nySDURL, districtDataURL])
       activeColor.push(colors[0]);
       changeMapColor("ELL_Number");
       mapHeader.textContent = "English Language Learners";
-      d3.selectAll('#nyc-school-district svg path').attr('data-data-name',dataNames[0]).attr('data-data-percent',dataPercents[0])
-      .attr('data-label',buttonLabels[0])
-
-      
+      d3.selectAll("#nyc-school-district svg path")
+        .attr("data-data-name", dataNames[0])
+        .attr("data-data-percent", dataPercents[0])
+        .attr("data-label", buttonLabels[0]);
 
       //adding event to buttons
 
       for (let i = 0; i < buttons.length; i++) {
         buttons[i].textContent = buttonLabels[i];
         buttons[i].dataset.dataName = dataNames[i];
-        buttons[i].dataset.dataPercent = dataPercents[i]
+        buttons[i].dataset.dataPercent = dataPercents[i];
 
         buttons[i].addEventListener("click", (event) => {
           let active = event.target.parentNode.querySelector(".button-active");
@@ -191,8 +208,13 @@ Promise.all([nySDURL, districtDataURL])
           changeMapColor(event.target.getAttribute("data-data-name"));
           mapHeader.textContent = event.target.textContent;
 
-        d3.selectAll('#nyc-school-district svg path').attr('data-data-name',event.target.getAttribute('data-data-name'))
-        .attr('data-data-percent',event.target.getAttribute('data-data-percent')).attr('data-label',event.target.textContent)
+          d3.selectAll("#nyc-school-district svg path")
+            .attr("data-data-name", event.target.getAttribute("data-data-name"))
+            .attr(
+              "data-data-percent",
+              event.target.getAttribute("data-data-percent")
+            )
+            .attr("data-label", event.target.textContent);
         });
       }
     };
@@ -342,7 +364,7 @@ const fours = [
 ];
 
 const createGroupedChart_childcare = () => {
-  const colors = ["#ff6633", "#ffcccc", "#3366cc"];
+  const colors = ["#ff6633", "#ffa600", "#3366cc"];
   const width = 550,
     height = 220;
   const margin = { left: 0, right: 50, top: 50, bottom: 50 };
@@ -410,7 +432,10 @@ const createGroupedChart_childcare = () => {
       .enter()
       .append("text")
       .text((d) => {
-        return commaFormatter(d.stat);
+        console.log(d)
+        if (d.stat !== 0) {
+          return commaFormatter(d.stat);
+        }
       })
       .attr("x", (d) => {
         return xScale(d.category);
