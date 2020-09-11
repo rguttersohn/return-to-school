@@ -160,34 +160,26 @@ h3 {
   margin: 3% 1%;
 }
 
-.graph-wrapper.single-data-point
-  .cause-of-death-flexbox
-  .cause-of-death-container {
-  padding: 1% 3%;
-}
-
 .graph-wrapper.pull-quote p {
   font-family: "Georgia", serif !important;
 }
-.graph-wrapper.pull-quote:nth-of-type(odd) {
+.graph-wrapper.pull-quote {
   float: right;
 }
 
-.graph-wrapper.pull-quote:nth-of-type(even),
-.graph-wrapper.single-data-point {
-  float: left;
-}
-.graph-wrapper.pull-quote p::before,
-.graph-wrapper.pull-quote p::after {
-  content: '"';
+
+.graph-wrapper.pull-quote p::before{
+  content: '479,411 ';
   font-size: 66px;
   color: #0099cd;
   display: block;
+  margin-bottom:40px;
 }
-.graph-wrapper.pull-quote p::after {
-  position: relative;
-  top: 35px;
+
+.graph-wrapper.pull-quote p{
+  line-height:120%
 }
+
 
 .legend-wrapper {
   display: flex;

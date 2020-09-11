@@ -48,17 +48,9 @@ Promise.all([nySDURL, districtDataURL])
           if (
             el.properties["SchoolDist"] === parseInt(event.target.dataset.sd)
           ) {
-            tooltip.innerHTML = `<p class="table-note" style="font-weight:bold">School District ${
-              el.properties["SchoolDist"]
-            }</p>
-            <p class="table-note">Number of ${
-              event.target.dataset.label
-            }:</p> ${commaFormatter(
-              el.properties[event.target.dataset.dataName]
-            )}
-            <p class="table-note">Percent of district:</p>${percentFormatter(
-              el.properties[event.target.dataset.dataPercent]
-            )}`;
+            tooltip.innerHTML = `<p class="table-note" style="font-weight:bold">School District ${el.properties["SchoolDist"]}</p>
+            <p class="table-note">Number of ${event.target.dataset.label}:</p> <span>${commaFormatter(el.properties[event.target.dataset.dataName])}</span>
+            <p class="table-note">Percent of district:</p><span>${percentFormatter(el.properties[event.target.dataset.dataPercent])}</span>`;
           }
         });
       };
@@ -239,7 +231,7 @@ Promise.all([nycZipURL, sitesURL])
         tooltip.style.left = `${event.clientX}px`;
         tooltip.style.top = `${event.clientY * 1.1}px`;
         tooltip.style.borderColor = event.target.getAttribute("fill");
-        tooltip.innerHTML = `<p class="table-note">Programs in zip code ${event.target.dataset.zipCode}:</p> ${event.target.dataset.sites}`;
+        tooltip.innerHTML = `<p class="table-note">Programs in zip code ${event.target.dataset.zipCode}:</p> <span>${event.target.dataset.sites}</span>`;
       };
 
       const hideTooltip = () => {
