@@ -325,192 +325,146 @@ Promise.all([nycZipURL, sitesURL])
     // end of await for zip code map
   });
 
-//childcare settings data
 
-const infants = [
-  { label: "Infants " },
-  { category: "Center", stat: 211 },
-  { category: "School", stat: 0 },
-  { category: "Family", stat: 2061 },
+  //create pie chart
+
+  // pie chart data
+const data_ages = [
+  { key: "Infants", value: 8000 },
+  { key: "Toddlers", value: 15108 },
+  { key: "3-year-olds", value: 26478 },
+  { key: "4-year-olds", value: 74080 },
 ];
 
-const toddlers = [
-  { label: "Toddlers" },
-  { category: "Center", stat: 1908 },
-  { category: "School", stat: 0 },
-  { category: "Family", stat: 4400 },
-];
+colors_ages = [
+  "#7c5eff",
+  "#a787ff",
+  "#cab2ff",
+  "#e9ddff"];
 
-const threes = [
-  { label: "3-Year-Olds" },
-  { category: "Center", stat: 11091 },
-  { category: "School", stat: 520 },
-  { category: "Family", stat: 2667 },
-];
 
-const fours = [
-  { label: "4-Year-Olds" },
-  { category: "Center", stat: 37696 },
-  { category: "School", stat: 30185 },
-  { category: "Family", stat: 280 },
-];
+//pie chart dimensons
+const height = 300,
+  width = 400,
+  margin = 50;
 
-const createGroupedChart_childcare = () => {
-  const colors = ["#ff6633", "#ffa600", "#3366cc"];
-  const width = 550,
-    height = 220;
-  const margin = { left: 0, right: 50, top: 50, bottom: 50 };
-
-  const xScale = d3
-    .scaleBand()
-    .range([0, width / 4])
-    .domain(fours.map((d) => d.category))
-    .padding(0.1);
-
-  const yScale = d3.scaleLinear().range([height, 0]).domain([0, 40000]);
-
-  let svg = d3
-    .select(`#childcare-settings svg`)
-    .attr("width", width + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
-
-  //y-axis
-  svg
-    .append("g")
-    .attr("class", "y-axis")
-    .call(
-      d3
-        .axisRight(yScale)
-        .tickFormat(d3.format(".0s"))
-        .tickSize([width + margin.right - 35])
-        .ticks(5)
-    )
-    .attr("transform", `translate(0,${margin.top})`);
-  d3.selectAll(".y-axis .domain").style("visibility", "hidden");
-  d3.selectAll(".y-axis .tick line").attr("stroke", "gainsboro");
-
-  const createCharts = (data, transX) => {
-    let trimmedData = data.filter((el) => el.category !== undefined);
-    let svg = d3.select(`#childcare-settings svg`);
-    svg
+  const createPieChart = (data, colorScheme, selector) => {
+    const arc = d3
+      .arc()
+      .innerRadius(10)
+      .outerRadius(width / 2)
+      .padAngle(0.05)
+      .padRadius(50);
+  
+    // Compute the position of each group on the pie:
+    const pie = d3.pie().value((d) => d.value)(data);
+  
+    //colors
+    const colors = d3.scaleOrdinal(colorScheme);
+  
+    let pieChartSVG = d3
+      .select(`.${selector} svg`)
+      .attr("width", width + margin * 2)
+      .attr("height", height + margin * 2);
+  
+    let pieChart = pieChartSVG
       .append("g")
-      .attr("class", "group")
-      .attr("width", width / 4)
-      .attr("transform", `translate(${transX},${margin.top})`)
-      .selectAll("rect")
-      .data(trimmedData)
-      .enter()
-      .append("rect")
-      .attr("x", (d) => {
-        return xScale(d.category);
-      })
-      .attr("width", (d) => {
-        return xScale.bandwidth();
-      })
-      .attr("y", (d) => {
-        return yScale(d.stat);
-      })
-      .attr("height", (d) => height - yScale(d.stat))
-      .attr("fill", (d, i) => colors[i])
-      .attr("data-setting", (d) => d.category);
-
-    svg
-      .append("g")
-      .attr("class", "label-group")
-      .attr("width", width / 4)
-      .attr("transform", `translate(${transX},${margin.top})`)
-      .selectAll("text")
-      .data(trimmedData)
-      .enter()
-      .append("text")
-      .text((d) => {
-        console.log(d)
-        if (d.stat !== 0) {
-          return commaFormatter(d.stat);
-        }
-      })
-      .attr("x", (d) => {
-        return xScale(d.category);
-      })
-      .attr("y", (d) => {
-        return yScale(d.stat);
-      })
-      .attr("dy", "-.5em")
-      .style("font-size", "10px")
-      .attr("data-setting", (d) => d.category);
-
-    //overall group labels
-    svg
-      .append("g")
-      .attr("class", "overall-label-group")
-      .attr("width", width / 4)
+      .attr("class", "pie-chart")
       .attr(
         "transform",
-        `translate(${transX + 60},${height + margin.top + 20})`
+        `translate(${width / 2 + margin},${height / 2 + margin})`
+      )
+      .selectAll("path")
+      .data(pie)
+      .enter()
+      .append("path")
+      .attr("d", arc)
+      .style("fill", (d) => colors(d.value))
+      .style("stroke", "gray")
+      .style("stroke-width", "lightgray")
+      .attr('data-category',d=>d.data.key);
+  
+    //add labels
+    let labels = pieChartSVG
+      .append("g")
+      .attr("class", "pie-chart-labels")
+      .attr(
+        "transform",
+        `translate(${width / 2 + margin},${height / 2 + margin})`
       )
       .selectAll("text")
-      .data(data)
+      .data(pie)
       .enter()
       .append("text")
-      .text((d) => {
-        return d.label;
+      .each(function (d) {
+        const center = arc.centroid(d);
+        d3.select(this).attr("x", center[0]).attr("y", center[1]);
+        console.log(this)
       })
-      .attr("x", (d) => {
-        return xScale(d.key);
-      })
-      .attr("y", (d) => {
-        return yScale(d.value);
-      })
-      .attr("dy", "-.5em")
+      .style("fill", "black")
       .attr("text-anchor", "middle")
-      .style("font-size", "12px")
-      .attr("data-setting", (d) => d.category);
+      .text((d) => `${d3.format(",")(d.data.value)}`)
+      .attr('data-category',d=>d.data.key);
+  
+    let keyLabels = pieChartSVG
+      .append("g")
+      .attr("class", "pie-chart-labels")
+      .attr(
+        "transform",
+        `translate(${width / 2 + margin},${height / 2 + margin - 20})`
+      )
+      .selectAll("text")
+      .data(pie)
+      .enter()
+      .append("text")
+      .each(function (d) {
+        const center = arc.centroid(d);
+        d3.select(this).attr("x", center[0]).attr("y", center[1]);
+      })
+      .style("fill", "black")
+      .style("font-weight", "bold")
+      .attr("text-anchor", "middle")
+      .text((d) => d.data.key)
+      .attr('data-category',d=>d.data.key);
+  
+    const legendLabels = document.querySelectorAll(
+      `.${selector} .legend-wrapper span`
+    );
+    const legendIcons = document.querySelectorAll(
+      `.${selector} .legend-wrapper i`
+    );
+  
+    for (let i = 0; i < legendIcons.length; i++) {
+      legendIcons[i].style.backgroundColor = colorScheme[i];
+      legendLabels[i].textContent = data[i].key;
+      legendIcons[i].dataset.category = data[i].key
+      legendLabels[i].dataset.category = data[i].key
+    }
+  
+    //adding interactivity
+    let pieChartElements = document.querySelectorAll(
+      `.${selector} [data-category]`
+    );
+  
+  
+    pieChartElements.forEach((element) => {
+      let unmatchedEls;
+      element.addEventListener("mouseover", (event) => {
+        unmatchedEls = document.querySelectorAll(
+          `.${selector} svg path:not([data-category='${event.target.dataset.category}']),.${selector} svg .pie-chart-labels text:not([data-category='${event.target.dataset.category}']),.${selector} .legend-wrapper i:not([data-category='${event.target.dataset.category}']),.legend-wrapper span:not([data-category='${event.target.dataset.category}'])`
+        );
+        for (let i = 0; i < unmatchedEls.length; i++) {
+          unmatchedEls[i].style.opacity = 0.05;
+        }
+      });
+      element.addEventListener("mouseout", (event) => {
+        for (let i = 0; i < unmatchedEls.length; i++) {
+          unmatchedEls[i].style.opacity = 1;
+        }
+      });
+    });
+  
+    // end of function
   };
-  //run the functions for the graphs for race of workers by industry
-  createCharts(infants, 0);
-  createCharts(toddlers, 137);
-  createCharts(threes, 137 * 2);
-  createCharts(fours, 137 * 3);
 
-  let legendIcon = document.querySelectorAll(
-    "#childcare-settings .legend-wrapper i"
-  );
-  let legendText = document.querySelectorAll(
-    "#childcare-settings .legend-wrapper span"
-  );
-
-  let trimmedData = fours.filter((el) => el.category !== undefined);
-
-  for (let i = 0; i < legendIcon.length; i++) {
-    legendIcon[i].style.backgroundColor = colors[i];
-    legendIcon[i].dataset.setting = trimmedData[i].category;
-    legendText[i].dataset.setting = trimmedData[i].category;
-    legendText[i].textContent = trimmedData[i].category;
-  }
-  //add interactivity
-
-  let elements = document.querySelectorAll(
-    "#childcare-settings [data-setting]"
-  );
-  for (let i = 0; i < elements.length; i++) {
-    let unmatchedElements;
-    elements[i].addEventListener("mouseenter", (event) => {
-      unmatchedElements = document.querySelectorAll(
-        `#childcare-settings .legend-wrapper :not([data-setting='${event.target.dataset.setting}']),#childcare-settings .group rect:not([data-setting='${event.target.dataset.setting}']),#childcare-settings svg .label-group text:not([data-setting='${event.target.dataset.setting}'])`
-      );
-      for (els of unmatchedElements) {
-        els.style.opacity = 0.1;
-      }
-    });
-
-    elements[i].addEventListener("mouseleave", (event) => {
-      for (els of unmatchedElements) {
-        els.style.opacity = 1;
-      }
-    });
-  }
-
-  // end of function
-};
-
-createGroupedChart_childcare();
+  createPieChart(data_ages, colors_ages, "ages");
